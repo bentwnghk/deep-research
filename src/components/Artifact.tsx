@@ -218,16 +218,16 @@ function Artifact(props: Props) {
             <span>English</span>
           </DropdownMenuItem>
           <DropdownMenuItem
+            onClick={() => translate("Traditional Chinese", systemInstruction)}
+          >
+            <span>🇭🇰</span>
+            <span>繁體中文</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem
             onClick={() => translate("Simplified Chinese", systemInstruction)}
           >
             <span>🇨🇳</span>
             <span>简体中文</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => translate("Traditional Chinese", systemInstruction)}
-          >
-            <span>🇭🇰</span>
-            <span>繁体中文</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => translate("Japanese", systemInstruction)}

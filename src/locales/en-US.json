@@ -33,7 +33,7 @@
     },
     "topic": {
       "title": "1. Research Topics",
-      "topicLabel": "1.1 Research topics",
+      "topicLabel": "1.1 Research Topics",
       "topicPlaceholder": "Any questions you want to know..."
     },
     "feedback": {
@@ -42,12 +42,12 @@
       "feedbackLabel": "Your Answer (Optional)",
       "feedbackPlaceholder": "You can answer whatever you want...",
       "questions": "2.1 System Questions",
-      "reportPlan": "2.2 Research report plan"
+      "reportPlan": "2.2 Research Report Plan"
     },
     "searchResult": {
       "title": "3. Information Collection",
       "emptyTip": "Waiting for research task...",
-      "suggestionLabel": "Research suggestions (Optional)",
+      "suggestionLabel": "Research Suggestions (Optional)",
       "suggestionPlaceholder": "Whether to add or adjust research directions...",
       "references": "References",
       "relatedImages": "Related Images"
@@ -57,7 +57,7 @@
       "emptyTip": "Waiting for data to be collated...",
       "researchedInfor": "Researched {{total}} websites",
       "localResearchedInfor": "Researched {{total}} local resources",
-      "writingRequirementLabel": "Writing requirements (optional)",
+      "writingRequirementLabel": "Writing Requirements (Optional)",
       "writingRequirementPlaceholder": "You can raise any request related to report writing."
     }
   },
@@ -104,7 +104,7 @@
     "localCrawler": "Local Crawler",
     "clear": "Clear",
     "fetch": "Fetch",
-    "localResourceTitle": "1.2 Local research resources (optional)",
+    "localResourceTitle": "1.2 Local Research Resources (Optional)",
     "addResource": "Add Resource",
     "addResourceMessage": "{{title}} has been added to the resource.",
     "resourceNotFound": "Resource not found",
@@ -249,26 +249,26 @@
     "model": "Model",
     "general": "System",
     "provider": "AI Provider",
-    "providerTip": "AI service provider. For AI aggregation services such as One Api and New Api, please select `Compatible OpenAI`.",
+    "providerTip": "AI service provider. For AI aggregation services such as One API and New API, please select `Compatible OpenAI`.",
     "openAICompatible": "OpenAI Compatible",
     "free": "Free",
     "mode": "API Mode",
     "modeTip": "In local mode, all requests are sent directly by the browser. In proxy mode, all requests are forwarded through the server.",
     "local": "Local",
     "proxy": "Proxy",
-    "apiKeyLabel": "Api Key",
+    "apiKeyLabel": "API Key",
     "apiKeyPlaceholder": "Please enter the model API key",
-    "apiUrlLabel": "Api Base Url",
+    "apiUrlLabel": "API Base URL",
     "apiUrlPlaceholder": "Please enter the API base URL",
     "resourceNameLabel": "Resource Name",
     "resourceNamePlaceholder": "Please enter the resource name",
-    "apiVersionLabel": "Api Version",
+    "apiVersionLabel": "API Version",
     "apiVersionPlaceholder": "Please enter the API version",
     "accessPassword": "Access Password",
-    "accessPasswordPlaceholder": "Please enter the server access password",
+    "accessPasswordPlaceholder": "Please enter the access password",
     "accessPasswordTip": "Server-side API authentication prevents API from being misused by external applications.",
     "thinkingModel": "Thinking Model",
-    "thinkingModelTip": "The core model used in deep research, it is recommended to use the thinking model.",
+    "thinkingModelTip": "The core model used in deep research, it is recommended to use a thinking model.",
     "networkingModel": "Task Model",
     "networkingModelTip": "The model used for secondary tasks, high output models are recommended.",
     "recommendedModels": "Recommended Models",
@@ -290,7 +290,7 @@
     "parallelSearchTip": "Parallel search helps speed up the data collection process, but too high a rate may trigger the model's request per minute limit.",
     "searchResults": "Search Results",
     "searchResultsTip": "The maximum number of web searches. Some search engines do not support this parameter.",
-    "searchApiKeyPlaceholder": "Please enter your Api Key",
+    "searchApiKeyPlaceholder": "Please enter your API Key",
     "searchScope": "Search Scope",
     "scopeValue": {
       "all": "All",
