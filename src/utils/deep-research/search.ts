@@ -148,7 +148,7 @@ export async function createSearchProvider({
         body: JSON.stringify({
           query,
           search_depth: "advanced",
-          topic: scope || "general",
+          topic: "general",
           max_results: Number(maxResult),
           include_images: true,
           include_image_descriptions: true,
