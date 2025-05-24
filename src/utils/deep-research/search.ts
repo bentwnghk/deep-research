@@ -131,7 +131,7 @@ export async function createSearchProvider({
   apiKey = "",
   query,
   maxResult = 5,
-  scope = "all",
+  scope = "",
 }: SearchProviderOptions) {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export async function createSearchProvider({
         body: JSON.stringify({
           query,
           search_depth: "advanced",
-          topic: "general",
+          topic: scope || "general",
           max_results: Number(maxResult),
           include_images: true,
           include_image_descriptions: true,
