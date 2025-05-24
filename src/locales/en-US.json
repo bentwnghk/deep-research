@@ -32,12 +32,12 @@
       "delete": "Delete"
     },
     "topic": {
-      "title": "1. Research Topics",
+      "title": "1. Research Directions",
       "topicLabel": "1.1 Research Topics",
       "topicPlaceholder": "Any questions you want to know..."
     },
     "feedback": {
-      "title": "2. Ask Question",
+      "title": "2. Probing Questions",
       "emptyTip": "Waiting for research topic...",
       "feedbackLabel": "Your Answer (Optional)",
       "feedbackPlaceholder": "You can answer whatever you want...",
@@ -48,7 +48,7 @@
       "title": "3. Information Collection",
       "emptyTip": "Waiting for research task...",
       "suggestionLabel": "Research Suggestions (Optional)",
-      "suggestionPlaceholder": "Whether to add or adjust research directions...",
+      "suggestionPlaceholder": "Add or adjust research directions...",
       "references": "References",
       "relatedImages": "Related Images"
     },
