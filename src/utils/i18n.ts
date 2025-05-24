@@ -21,7 +21,7 @@ export function detectLanguage() {
   const languageDetector = new LanguageDetector();
   languageDetector.init();
   const detectedLang = languageDetector.detect();
-  let lang: string = "en-US";
+  let lang: string = "zh-CN";
   const localeLang = keys(locales);
   if (Array.isArray(detectedLang)) {
     detectedLang.reverse().forEach((langCode) => {
