@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: xiangfa/deep-research
+          images: bentwng/deep-research
           tags: |
             type=raw,value=latest
             type=ref,event=tag
