@@ -10,8 +10,6 @@ const normalizeLocale = (locale: string) => {
     return "en-US";
   } else if (locale.startsWith("zh")) {
     return "zh-CN";
-  } else if (locale.startsWith("es")) {
-    return "es-ES";
   } else {
     return locale;
   }

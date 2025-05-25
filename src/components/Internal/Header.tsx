@@ -13,7 +13,7 @@ function Header() {
   return (
     <>
       <header className="flex justify-between items-center my-6 max-sm:my-4 print:hidden">
-        <a href="https://hub.docker.com/r/bentwng/deep-research/tags" target="_blank">
+        <a href="https://research.mr5ai.com/" target="_self">
           <h1 className="text-left text-xl font-semibold">
             {t("title")}
             <small className="ml-2 font-normal text-base">v{VERSION}</small>

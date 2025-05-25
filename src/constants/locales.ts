@@ -1,5 +1,4 @@
 export default {
   "en-US": "English",
   "zh-CN": "繁體中文",
-  "es-ES": "Español",
 } as const;
