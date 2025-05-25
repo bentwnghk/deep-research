@@ -186,7 +186,8 @@ function useDeepResearch() {
       if (
         enableSearch &&
         searchProvider === "model" &&
-        provider === "google" &&
+        (provider === "google" || provider === "openaicompatible") &&
+        model.startsWith("gemini") &&
         isNetworkingModel(model)
       ) {
         return createModelProvider(model, { useSearchGrounding: true });
@@ -198,7 +199,7 @@ function useDeepResearch() {
       // Enable OpenAI's built-in search tool
       if (enableSearch && searchProvider === "model") {
         if (
-          ["openai", "azure"].includes(provider) &&
+          ["openai", "azure", "openaicompatible"].includes(provider) &&
           model.startsWith("gpt-4o")
         ) {
           return {
@@ -226,7 +227,7 @@ function useDeepResearch() {
             },
           } as ProviderOptions;
         } else if (
-          provider === "xai" &&
+          (provider === "xai" || provider === "openaicompatible") &&
           model.startsWith("grok-3") &&
           !model.includes("mini")
         ) {
