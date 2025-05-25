@@ -20,7 +20,7 @@ COPY . .
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN yarn run build:standalone
 
@@ -30,6 +30,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_BUILD_MODE=standalone
+ENV NEXT_PUBLIC_DISABLED_AI_PROVIDER=google,openai,anthropic,deepseek,xai,mistral,azure,openrouter,ollama
+ENV NEXT_PUBLIC_DISABLED_SEARCH_PROVIDER=firecrawl,exa,bocha,searxng
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
