@@ -275,7 +275,7 @@ class DeepResearch {
               item.query,
               item.researchGoal,
               sources,
-              enableReferences
+              sources.length > 0 && enableReferences
             ),
             this.getResponseLanguagePrompt(),
           ].join("\n\n"),
@@ -408,8 +408,8 @@ class DeepResearch {
           sources.map((item) => pick(item, ["title", "url"])),
           images,
           "",
-          enableCitationImage,
-          enableReferences
+          images.length > 0 && enableCitationImage,
+          sources.length > 0 && enableReferences
         ),
         this.getResponseLanguagePrompt(),
       ].join("\n\n"),
