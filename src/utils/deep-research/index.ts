@@ -203,21 +203,19 @@ class DeepResearch {
       let searchResult;
       let sources: Source[] = [];
       let images: ImageSource[] = [];
-      const { taskModel } = this.options.AIProvider;
-      const { provider = "model", maxResult = 5 } = this.options.searchProvider;
-      if (provider === "model") {
+      if (this.options.searchProvider.provider === "model") {
         const getTools = async () => {
           // Enable OpenAI's built-in search tool
           if (
-            provider === "model" &&
-            ["openai", "azure"].includes(taskModel) &&
-            taskModel.startsWith("gpt-4o")
+            this.options.searchProvider.provider === "model" &&
+            ["openai", "azure"].includes(this.options.AIProvider.taskModel) &&
+            this.options.AIProvider.taskModel.startsWith("gpt-4o")
           ) {
             const { openai } = await import("@ai-sdk/openai");
             return {
               web_search_preview: openai.tools.webSearchPreview({
                 // optional configuration:
-                searchContextSize: maxResult > 5 ? "high" : "medium",
+                searchContextSize: "medium",
               }),
             };
           } else {
@@ -226,13 +224,16 @@ class DeepResearch {
         };
         const getProviderOptions = () => {
           // Enable OpenRouter's built-in search tool
-          if (provider === "model" && taskModel === "openrouter") {
+          if (
+            this.options.searchProvider.provider === "model" &&
+            this.options.AIProvider.taskModel === "openrouter"
+          ) {
             return {
               openrouter: {
                 plugins: [
                   {
                     id: "web",
-                    max_results: maxResult ?? 5,
+                    max_results: this.options.searchProvider.maxResult ?? 5,
                   },
                 ],
               },
@@ -262,7 +263,7 @@ class DeepResearch {
           sources = result.sources;
           images = result.images;
         } catch (err) {
-          const errorMessage = `[${provider}]: ${
+          const errorMessage = `[${this.options.searchProvider.provider}]: ${
             err instanceof Error ? err.message : "Search Failed"
           }`;
           throw new Error(errorMessage);

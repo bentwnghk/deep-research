@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
                 data.status
               }`
             );
-            if (data.step === "final-report" && data.status === "end") {
+            if (data.step === "final-report") {
               controller.close();
             }
           } else if (event === "error") {
