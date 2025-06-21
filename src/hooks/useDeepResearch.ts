@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { streamText, type JSONValue, type Tool } from "ai";
+import { streamText, smoothStream, type JSONValue, type Tool } from "ai";
 import { parsePartialJson } from "@ai-sdk/ui-utils";
 import { openai } from "@ai-sdk/openai";
 import { type GoogleGenerativeAIProviderMetadata } from "@ai-sdk/google";
@@ -37,6 +37,10 @@ function getResponseLanguagePrompt() {
   return `\n\n**Respond in the same language as the user's language**`;
 }
 
+function smoothTextStream() {
+  return smoothStream({ chunking: /./, delayInMs: 0 });
+}
+
 function handleError(error: unknown) {
   const errorMessage = parseError(error);
   toast.error(errorMessage);
@@ -61,6 +65,7 @@ function useDeepResearch() {
         generateQuestionsPrompt(question),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
+      experimental_transform: smoothTextStream(),
       onError: handleError,
     });
     let content = "";
@@ -96,6 +101,7 @@ function useDeepResearch() {
       prompt: [writeReportPlanPrompt(query), getResponseLanguagePrompt()].join(
         "\n\n"
       ),
+      experimental_transform: smoothTextStream(),
       onError: handleError,
     });
     let content = "";
@@ -143,6 +149,7 @@ function useDeepResearch() {
         processSearchKnowledgeResultPrompt(query, researchGoal, knowledges),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
+      experimental_transform: smoothTextStream(),
       onError: handleError,
     });
     let content = "";
@@ -298,6 +305,7 @@ function useDeepResearch() {
                   ),
                   getResponseLanguagePrompt(),
                 ].join("\n\n"),
+                experimental_transform: smoothTextStream(),
                 onError: handleError,
               });
             } else {
@@ -310,6 +318,7 @@ function useDeepResearch() {
                 ].join("\n\n"),
                 tools: getTools(networkingModel),
                 providerOptions: getProviderOptions(networkingModel),
+                experimental_transform: smoothTextStream(),
                 onError: handleError,
               });
             }
@@ -321,6 +330,7 @@ function useDeepResearch() {
                 processResultPrompt(item.query, item.researchGoal),
                 getResponseLanguagePrompt(),
               ].join("\n\n"),
+              experimental_transform: smoothTextStream(),
               onError: (err) => {
                 taskStore.updateTask(item.query, { state: "failed" });
                 handleError(err);
@@ -408,6 +418,7 @@ function useDeepResearch() {
         reviewSerpQueriesPrompt(reportPlan, learnings, suggestion),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
+      experimental_transform: smoothTextStream(),
       onError: handleError,
     });
 
@@ -486,7 +497,9 @@ function useDeepResearch() {
         writeFinalReportPrompt(
           reportPlan,
           learnings,
-          enableReferences ? sources.map((item) => pick(item, ["title", "url"])) : [],
+          enableReferences
+            ? sources.map((item) => pick(item, ["title", "url"]))
+            : [],
           enableCitationImage ? images : [],
           requirement,
           enableCitationImage,
@@ -494,6 +507,7 @@ function useDeepResearch() {
         ),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
+      experimental_transform: smoothTextStream(),
       onError: handleError,
     });
     let content = "";
@@ -553,6 +567,7 @@ function useDeepResearch() {
           generateSerpQueriesPrompt(reportPlan),
           getResponseLanguagePrompt(),
         ].join("\n\n"),
+        experimental_transform: smoothTextStream(),
         onError: handleError,
       });
 
