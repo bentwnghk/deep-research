@@ -37,8 +37,11 @@ function getResponseLanguagePrompt() {
   return `\n\n**Respond in the same language as the user's language**`;
 }
 
-function smoothTextStream() {
-  return smoothStream({ chunking: /./, delayInMs: 0 });
+function smoothTextStream(type: "character" | "word" | "line") {
+  return smoothStream({
+    chunking: type === "character" ? /./ : type,
+    delayInMs: 0,
+  });
 }
 
 function handleError(error: unknown) {
@@ -49,6 +52,7 @@ function handleError(error: unknown) {
 function useDeepResearch() {
   const { t } = useTranslation();
   const taskStore = useTaskStore();
+  const { smoothTextStreamType } = useSettingStore();
   const { createModelProvider, getModel } = useModelProvider();
   const { search } = useWebSearch();
   const [status, setStatus] = useState<string>("");
@@ -65,7 +69,7 @@ function useDeepResearch() {
         generateQuestionsPrompt(question),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
-      experimental_transform: smoothTextStream(),
+      experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
     let content = "";
@@ -101,7 +105,7 @@ function useDeepResearch() {
       prompt: [writeReportPlanPrompt(query), getResponseLanguagePrompt()].join(
         "\n\n"
       ),
-      experimental_transform: smoothTextStream(),
+      experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
     let content = "";
@@ -149,7 +153,7 @@ function useDeepResearch() {
         processSearchKnowledgeResultPrompt(query, researchGoal, knowledges),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
-      experimental_transform: smoothTextStream(),
+      experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
     let content = "";
@@ -305,7 +309,7 @@ function useDeepResearch() {
                   ),
                   getResponseLanguagePrompt(),
                 ].join("\n\n"),
-                experimental_transform: smoothTextStream(),
+                experimental_transform: smoothTextStream(smoothTextStreamType),
                 onError: handleError,
               });
             } else {
@@ -318,7 +322,7 @@ function useDeepResearch() {
                 ].join("\n\n"),
                 tools: getTools(networkingModel),
                 providerOptions: getProviderOptions(networkingModel),
-                experimental_transform: smoothTextStream(),
+                experimental_transform: smoothTextStream(smoothTextStreamType),
                 onError: handleError,
               });
             }
@@ -330,7 +334,7 @@ function useDeepResearch() {
                 processResultPrompt(item.query, item.researchGoal),
                 getResponseLanguagePrompt(),
               ].join("\n\n"),
-              experimental_transform: smoothTextStream(),
+              experimental_transform: smoothTextStream(smoothTextStreamType),
               onError: (err) => {
                 taskStore.updateTask(item.query, { state: "failed" });
                 handleError(err);
@@ -393,13 +397,24 @@ function useDeepResearch() {
                 )
                 .join("\n");
           }
-          taskStore.updateTask(item.query, {
-            state: "completed",
-            learning: content,
-            sources,
-            images,
-          });
-          return content;
+
+          if (content.length > 0) {
+            taskStore.updateTask(item.query, {
+              state: "completed",
+              learning: content,
+              sources,
+              images,
+            });
+            return content;
+          } else {
+            taskStore.updateTask(item.query, {
+              state: "failed",
+              learning: "",
+              sources: [],
+              images: [],
+            });
+            return "";
+          }
         });
       })
     );
@@ -418,7 +433,7 @@ function useDeepResearch() {
         reviewSerpQueriesPrompt(reportPlan, learnings, suggestion),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
-      experimental_transform: smoothTextStream(),
+      experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
 
@@ -507,7 +522,7 @@ function useDeepResearch() {
         ),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
-      experimental_transform: smoothTextStream(),
+      experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
     let content = "";
@@ -542,16 +557,20 @@ function useDeepResearch() {
           .join("\n");
       updateFinalReport(content);
     }
-    const title = (content || "")
-      .split("\n")[0]
-      .replaceAll("#", "")
-      .replaceAll("*", "")
-      .trim();
-    setTitle(title);
-    setSources(sources);
-    const id = save(taskStore.backup());
-    setId(id);
-    return content;
+    if (content.length > 0) {
+      const title = (content || "")
+        .split("\n")[0]
+        .replaceAll("#", "")
+        .replaceAll("*", "")
+        .trim();
+      setTitle(title);
+      setSources(sources);
+      const id = save(taskStore.backup());
+      setId(id);
+      return content;
+    } else {
+      return "";
+    }
   }
 
   async function deepResearch() {
@@ -567,7 +586,7 @@ function useDeepResearch() {
           generateSerpQueriesPrompt(reportPlan),
           getResponseLanguagePrompt(),
         ].join("\n\n"),
-        experimental_transform: smoothTextStream(),
+        experimental_transform: smoothTextStream(smoothTextStreamType),
         onError: handleError,
       });
 
