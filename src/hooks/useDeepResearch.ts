@@ -45,6 +45,7 @@ function smoothTextStream(type: "character" | "word" | "line") {
 }
 
 function handleError(error: unknown) {
+  console.log(error);
   const errorMessage = parseError(error);
   toast.error(errorMessage);
 }
@@ -535,6 +536,7 @@ function useDeepResearch() {
         ),
         getResponseLanguagePrompt(),
       ].join("\n\n"),
+      temperature: 0.5,
       experimental_transform: smoothTextStream(smoothTextStreamType),
       onError: handleError,
     });
