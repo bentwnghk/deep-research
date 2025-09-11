@@ -327,6 +327,8 @@
     "citationImageTip": "啟用引用圖片，會通過 prompt 嘗試在最終報告中添加與內容相關的圖片。",
     "textOutputMode": "文本輸出模式",
     "textOutputModeTip": "AI 的文本輸出效果。字符：像打字機那樣輸出文本。單詞：按單詞輸出，輸出效率最高。行：輸出效果最平穩。",
+    "fileFormatResource": "文件附件",
+    "fileFormatResourceTip": "使用文件格式的附件可以有效減少 token 的使用量，避免超出模型最大上下文限制，僅對支援文件理解的模型有效。",
     "character": "字符",
     "word": "單詞",
     "line": "行",
