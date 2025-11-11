@@ -23,7 +23,7 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PUBLIC_DISABLED_AI_PROVIDER=google,openai,anthropic,deepseek,xai,mistral,azure,openrouter,ollama
 ENV NEXT_PUBLIC_DISABLED_SEARCH_PROVIDER=firecrawl,exa,bocha,searxng
-ENV NEXT_PUBLIC_MODEL_LIST=-all,+claude-3-5-haiku-20241022,+claude-3-7-sonnet-20250219,+claude-sonnet-4-20250514,+deepseek-chat,+deepseek-reasoner,+gemini-2.0-flash-exp,+gemini-2.5-flash-lite-preview-06-17,+gemini-2.5-flash,+gemini-2.5-pro,+gpt-4.1-nano,+gpt-4.1-mini,+gpt-4.1,+gpt-4o-mini,+gpt-4o,+glm-4.5-air,+glm-4.5
+ENV NEXT_PUBLIC_MODEL_LIST=-all,+claude-sonnet-4-5,+deepseek-chat,+deepseek-reasoner,+gemini-2.0-flash-exp,+gemini-2.5-flash-lite,+gemini-2.5-flash,+gemini-2.5-pro,+gpt-5-mini,+gpt-5-chat,+glm-4.6,+kimi-k2-thinking
 
 RUN yarn run build:standalone
 
